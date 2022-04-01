@@ -1,0 +1,7 @@
+<div>
+    <h2>Task: {{task.id}}</h2>
+    <label for="title">Task title:</label>
+    <input id="title" [(ngModel)]="task.title" placeholder="title">
+</div>
+<div><span>Title: </span>{{task.title | uppercase}}</div>
+<div><span>State: </span>{{task.state | uppercase}}</div>
