@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../task'
+import { TASKS } from '../mock-tasks';
 
 @Component({
   selector: 'app-tasks',
@@ -7,6 +8,8 @@ import { Task } from '../task'
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
+
+  tasks = TASKS;
 
   task: Task = {
     id: 1,
