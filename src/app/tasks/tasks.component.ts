@@ -11,11 +11,11 @@ export class TasksComponent implements OnInit {
 
   tasks = TASKS;
 
-  task: Task = {
-    id: 1,
-    title: 'Learn Angular',
-    state: 'Doing'
-  };
+  selectedTask?: Task;
+
+  onSelect(task: Task): void {
+    this.selectedTask = task;
+  }
 
   constructor() { }
 

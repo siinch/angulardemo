@@ -1,15 +1,20 @@
-<h2>My Tasks</h2>
+<h2>My tasks</h2>
 <ul class="tasks">
-    <li *ngFor="let task of tasks">
-        <span class="badge">{{task.id}}</span>
-        {{task.title}} {{task.state}} 
-    </li>
+  <li *ngFor="let task of tasks">
+    <button [class.selected]="task === selectedTask" type="button" (click)="onSelect(task)">
+      <span class="badge">{{task.id}}</span>
+      <span class="title">{{task.title}}</span>
+    </button>
+  </li>
 </ul>
 
-<div>
-    <h2>Task: {{task.id}}</h2>
-    <label for="title">Task title:</label>
-    <input id="title" [(ngModel)]="task.title" placeholder="title">
+<div *ngIf="selectedTask">
+
+  <h2>{{selectedTask.id}} Details</h2>
+  <div>Title: {{selectedTask.title | uppercase}}</div>
+  <div>
+    <label for="task-title">Task title: </label>
+    <input id="task-title" [(ngModel)]="selectedTask.title" placeholder="Title">
+  </div>
+
 </div>
-<div><span>Title: </span>{{task.title | uppercase}}</div>
-<div><span>State: </span>{{task.state | uppercase}}</div>
