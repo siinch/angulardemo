@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../task'
 import { TaskService } from '../task.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-tasks',
@@ -9,7 +10,10 @@ import { TaskService } from '../task.service';
 })
 export class TasksComponent implements OnInit {
 
-  constructor(private taskService: TaskService) { }
+  constructor(
+    private taskService: TaskService,
+    private messageService: MessageService
+    ) { }
 
   tasks: Task[] = [];
 
@@ -22,6 +26,8 @@ export class TasksComponent implements OnInit {
 
   onSelect(task: Task): void {
     this.selectedTask = task;
+    this.messageService
+    .add(`Selected task: ${JSON.stringify(this.selectedTask)}`);
   }
 
   ngOnInit(): void {
