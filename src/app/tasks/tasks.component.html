@@ -7,14 +7,4 @@
     </button>
   </li>
 </ul>
-
-<div *ngIf="selectedTask">
-
-  <h2>{{selectedTask.id}} Details</h2>
-  <div>Title: {{selectedTask.title | uppercase}}</div>
-  <div>
-    <label for="task-title">Task title: </label>
-    <input id="task-title" [(ngModel)]="selectedTask.title" placeholder="Title">
-  </div>
-
-</div>
+<app-task-detail [task]="selectedTask"></app-task-detail>
