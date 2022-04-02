@@ -1,6 +1,7 @@
 <h2>Top Heroes</h2>
 <div class="tasks-menu">
-  <a *ngFor="let task of tasks">
-    {{task.title}}
+  <a *ngFor="let task of tasks"
+  routerLink="/tasks/detail/{{task.id}}">
+  {{task.title}}
   </a>
 </div>

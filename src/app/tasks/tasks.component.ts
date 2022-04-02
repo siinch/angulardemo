@@ -17,17 +17,9 @@ export class TasksComponent implements OnInit {
 
   tasks: Task[] = [];
 
-  selectedTask?: Task;
-
   getTasks(): void {
     this.taskService.getTasks()
     .subscribe(tasks => this.tasks = tasks);;
-  }
-
-  onSelect(task: Task): void {
-    this.selectedTask = task;
-    this.messageService
-    .add(`Selected task: ${JSON.stringify(this.selectedTask)}`);
   }
 
   ngOnInit(): void {
