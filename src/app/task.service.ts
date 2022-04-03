@@ -12,6 +12,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class TaskService {
 
   private tasksUrl = 'api/tasks';
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(this.tasksUrl)
@@ -26,8 +29,15 @@ export class TaskService {
     const url = `${this.tasksUrl}/${id}`;
     return this.http.get<Task>(url).pipe(
       tap(_ => this.log(`fetched task with id: ${id}`)),
-      catchError(this.handleError<Task>(`getTask id: ${id}`))
+      catchError(this.handleError<Task>(`getTask with id: ${id}`))
     );    
+  }
+
+  updateTask(task: Task): Observable<any> {
+    return this.http.put(this.tasksUrl, task, this.httpOptions).pipe(
+      tap(_ => this.log(`updated task with id: ${task.id}`)),
+      catchError(this.handleError<any>(`updateTask`))
+    );
   }
 
   private log(message: string) {
