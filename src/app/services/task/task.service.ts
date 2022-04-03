@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Task } from './task';
-import { TASKS } from './mock-tasks';
+import { Task } from '../../models/task';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { MessageService } from './message.service';
+import { MessageService } from '../../services/message/message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -37,6 +36,14 @@ export class TaskService {
     return this.http.put(this.tasksUrl, task, this.httpOptions).pipe(
       tap(_ => this.log(`updated task with id: ${task.id}`)),
       catchError(this.handleError<any>(`updateTask`))
+    );
+  }
+
+  /** POST: add a new task to the server */
+  addTask(task: Task): Observable<Task> {
+    return this.http.post<Task>(this.tasksUrl, task, this.httpOptions).pipe(
+      tap((newTask: Task) => this.log(`added task with id=´: ${newTask.id}`)),
+      catchError(this.handleError<Task>('addTask'))
     );
   }
 

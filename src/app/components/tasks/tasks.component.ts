@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Task } from '../task'
-import { TaskService } from '../task.service';
-import { MessageService } from '../message.service';
+import { Task } from '../../models/task'
+import { TaskService } from '../../services/task/task.service';
+import { MessageService } from '../../services/message/message.service';
 
 @Component({
   selector: 'app-tasks',
@@ -20,6 +20,16 @@ export class TasksComponent implements OnInit {
   getTasks(): void {
     this.taskService.getTasks()
     .subscribe(tasks => this.tasks = tasks);;
+  }
+
+  add(title: string): void {
+    title = title.trim();
+    const state = 'Backlog';
+    if (!title) { return; }
+    this.taskService.addTask({ title, state } as Task)
+      .subscribe(task => {
+        this.tasks.push(task);
+      });
   }
 
   ngOnInit(): void {

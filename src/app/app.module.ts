@@ -6,13 +6,13 @@ import { HttpClientModule } from '@angular/common/http'
 
 // only necessary for development/testing
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
+import { InMemoryDataService } from './services/in-memory-data/in-memory-data.service';
 
-import { AppComponent } from './app.component';
-import { TasksComponent } from './tasks/tasks.component';
-import { TaskDetailComponent } from './task-detail/task-detail.component';
-import { MessagesComponent } from './messages/messages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { AppComponent } from './components/app/app.component';
+import { TasksComponent } from './components/tasks/tasks.component';
+import { TaskDetailComponent } from './components/task-detail/task-detail.component';
+import { MessagesComponent } from './components/messages/messages.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
