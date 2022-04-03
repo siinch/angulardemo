@@ -3,16 +3,17 @@ import { Task } from './task';
 import { TASKS } from './mock-tasks';
 import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
+  private tasksUrl = 'api/tasks';
+
   getTasks(): Observable<Task[]> {
-    const tasks = of(TASKS);
-    this.messageService.add('TaskService: fetched tasks');
-    return tasks;
+    return this.http.get<Task[]>(this.tasksUrl);
   }
 
 
@@ -23,5 +24,12 @@ export class TaskService {
     return of(task);
   }
 
-  constructor(private messageService: MessageService) { }
+  private log(message: string) {
+    this.messageService.add(`TaskService: ${message}`);
+  }
+
+  constructor(
+    private http: HttpClient,
+    private messageService: MessageService
+    ) { }
 }
