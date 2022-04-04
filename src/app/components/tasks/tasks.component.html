@@ -15,6 +15,13 @@
   <li *ngFor="let task of tasks">
     <a routerLink="/tasks/detail/{{task.id}}">
       <span class="badge">{{task.id}}</span>{{task.title}}
-      </a>
+    </a>
+    <button
+    type="button"
+    class="delete"
+    title="delete task"
+    (click)="delete(task)">
+    x
+    </button>
   </li>
 </ul>

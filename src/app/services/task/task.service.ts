@@ -47,6 +47,15 @@ export class TaskService {
     );
   }
 
+  /** DELETE: delete the task from the server */
+  deleteTask(id: number): Observable<Task> {
+    const url = `${this.tasksUrl}/${id}`;
+    return this.http.delete<Task>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`Deleted task with id: ${id}`)),
+      catchError(this.handleError<Task>("deleteTask"))
+    );
+  }
+
   private log(message: string) {
     this.messageService.add(`TaskService: ${message}`);
   }
