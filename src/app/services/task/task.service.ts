@@ -56,6 +56,21 @@ export class TaskService {
     );
   }
 
+  /** GET: get tasks by search term */
+  searchTasks(term: string): Observable<Task[]> {
+    // if search is empty, return nothing
+    if(!term.trim()) {
+      return of([]);
+    }
+    const url = `${this.tasksUrl}/?title=${term}`;
+    return this.http.get<Task[]>(url).pipe(
+      tap(result => result.length ? 
+        this.log(`found tasks matching term: ${term}`) :
+        this.log(`did not find any tasks mathcing term: ${term}`)),
+      catchError(this.handleError<Task[]>(`searchTasks`, []))
+    );
+  }
+
   private log(message: string) {
     this.messageService.add(`TaskService: ${message}`);
   }
